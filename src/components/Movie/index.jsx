@@ -1,21 +1,26 @@
-import React from 'react';
-import {Link, useParams} from 'react-router-dom';
+import React from "react";
+import movies from "./../../movies.js";
 
-import movies from './../../movies.js';
+import { useParams } from "react-router-dom";
 
 const Movie = () => {
-	const {id} = useParams();
-	const movie = movies.find(movie => movie.id == id);
-	console.log(id, movie);
+  const { id } = useParams();
 
-	return (
-		<div className="movie">
-			<img src={`/assets/${movie.poster}`} alt={movie.title} />
-			<h2>{movie.title}</h2>
-			<p>{movie.storyline}</p>
-			<p><Link to="/">Zpět na seznam filmů</Link></p>
-		</div>
-	)
-}
+  const nazev = movies.find((ele) => ele.id == id).title;
+  const popis = movies.find((ele) => ele.id == id).storyline;
+  const obrazek = movies.find((ele) => ele.id == id).poster;
+
+  return (
+    <div className="movie">
+      <h1>{nazev}</h1>
+      <img src={`../assets/${obrazek}`} alt={nazev} />
+
+      <p>
+        <small>Popis:</small>
+      </p>
+      <p>{popis}</p>
+    </div>
+  );
+};
 
 export default Movie;
